@@ -1,4 +1,5 @@
 import { LitElement, css, html, customElement, property } from 'lit-element';
+import "@pwabuilder/pwa-inking"
 
 // For more info on the @pwabuilder/pwainstall component click here https://github.com/pwa-builder/pwa-install
 import '@pwabuilder/pwainstall';
@@ -47,6 +48,10 @@ export class AppHome extends LitElement {
           width: 50%;
         }
       }
+      inking-canvas::part(canvas) {
+        width: 70%;
+        height: 50vh;
+      }
     `;
   }
 
@@ -73,22 +78,9 @@ export class AppHome extends LitElement {
   render() {
     return html`
       <div>
-
-        <div id="welcomeBlock">
-
-          <img src="assets/icons/icon_512.png" alt="app icon">
-          <h2>${this.message}</h2>
-
-          <p>
-            Welcome to the <a href="https://pwabuilder.com">PWABuilder</a> pwa-starter!
-
-            Be sure to head back to <a href="https://pwabuilder.com">PWABuilder</a> when you are ready to ship this PWA to the Microsoft, Google Play and Samsung Galaxy stores!
-          </p>
-
-          ${'share' in navigator ? html`<button @click="${this.share}">Share this Starter!</button>` : null}
-        </div>
-
-        <pwa-install>Install PWA Starter</pwa-install>
+        <inking-canvas name="myInkingCanvas">
+          <inking-toolbar canvas="myInkingCanvas"></inking-toolbar>
+        </inking-canvas>
       </div>
     `;
   }
